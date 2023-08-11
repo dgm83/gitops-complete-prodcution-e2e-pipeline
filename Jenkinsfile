@@ -16,7 +16,7 @@ pipeline {
     
         stage("Checkout from SCM") {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/dmancloud/gitops-complete-prodcution-e2e-pipeline'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/dgm83/gitops-complete-prodcution-e2e-pipeline'
             }
         }
     
@@ -35,13 +35,13 @@ pipeline {
         stage("Push the changed deployment file to Git") {
             steps {
                 sh """
-                    git config --global user.name "dmancloud"
-                    git config --global user.email "dinesh@dman.cloud"
+                    git config --global user.name "dgm83"
+                    git config --global user.email "davidgm1.aws@maquetadgm"
                     git add deployment.yaml
                     git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                    sh "git push https://github.com/dmancloud/gitops-complete-prodcution-e2e-pipeline main"
+                    sh "git push https://github.com/dgm83/gitops-complete-prodcution-e2e-pipeline main"
                 }
             }
         }
